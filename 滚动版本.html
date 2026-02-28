@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>致瑶瑶：生日快乐</title>
+    <style>
+        /* 引入优雅字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;500&display=swap');
+
+        :root {
+            --theme-purple: #9d8df1;
+            --soft-white: #fdfbff;
+            --text-main: #333;
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            height: 100%; width: 100%; overflow: hidden;
+            background: #fff; font-family: 'Noto Serif SC', serif;
+        }
+
+        /* 全屏滚动容器 */
+        .snap-container {
+            height: 100vh; width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .snap-container::-webkit-scrollbar { display: none; }
+
+        /* 背景爱心掉落层 */
+        #particle-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 10;
+        }
+
+        section {
+            height: 100vh; width: 100vw;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 40px 30px;
+            padding-bottom: calc(60px + var(--safe-bottom));
+            text-align: center;
+            background: linear-gradient(180deg, rgba(157,141,241,0.05) 0%, #fff 100%);
+        }
+
+        /* 元素动画 */
+        .content-box {
+            opacity: 0; transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+        section.active .content-box { opacity: 1; transform: translateY(0); }
+
+        h1 { font-family: 'Ma Shan Zheng', cursive; font-size: 2.6rem; color: #764ba2; margin-bottom: 20px; }
+        h2 { font-size: 1.1rem; color: var(--theme-purple); margin-bottom: 10px; letter-spacing: 2px; }
+        p { font-size: 1.05rem; line-height: 1.8; color: var(--text-main); }
+
+        .date-tag {
+            display: inline-block; background: var(--theme-purple); color: white;
+            padding: 3px 15px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 20px;
+        }
+
+        /* 指示箭 */
+        .arrow {
+            position: absolute; bottom: calc(20px + var(--safe-bottom));
+            animation: bounce 2s infinite; color: var(--theme-purple); font-size: 1.2rem;
+        }
+        @keyframes bounce { 0%,20%,50%,80%,100% {transform:translateY(0)} 40% {transform:translateY(-10px)} 60% {transform:translateY(-5px)} }
+
+        /* 炫酷点击效果 */
+        .sparkle {
+            position: fixed; pointer-events: none; z-index: 9999;
+            animation: sparkleAnim 0.8s ease-out forwards;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2) translateY(-40px); opacity: 0; }
+        }
+
+        /* ----- 音乐播放器按钮样式 ----- */
+        .music-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: rgba(157, 141, 241, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(157, 141, 241, 0.4);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 0 15px rgba(157, 141, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(157, 141, 241, 0.5);
+        }
+
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 背景音乐 -->
+<audio id="bgMusic" loop src="bgm.mp3"></audio>
+
+<!-- 音乐控制按钮 -->
+<div id="music-btn" class="music-btn">🎵</div>
+
+<div id="particle-container"></div>
+
+<div class="snap-container" id="scrollContainer">
+    
+    <section class="active">
+        <div class="content-box">
+            <div class="date-tag">2026.02.28</div>
+            <h1>瑶瑶，生日快乐</h1>
+            <p>这一路走来，满心都是庆幸</p>
+        </div>
+        <div class="arrow">向上划动开启回忆</div>
+    </section>
+
+    <section>
+        <div class="content-box">
+            <div class="date-tag">2024.05.06 · 初遇</div>
+            <h2>紫色的序章</h2>
+            <p>那天你穿着紫色大T恤，发型像“金毛狮王”，我们奇迹般地坐上了同一节车厢。也许那一刻，命运就决定了我是你的“哥哥”。</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-box">
+            <h2>温润的碎片</h2>
+            <p>是豆腐包与茶鸡蛋的香气，也是北京西站“卧龙凤雏”般奔跑的记忆。那些共同跨过的坎坷，都成了最生动的注脚。</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-box">
+            <h2>彼此的底气</h2>
+            <p>为你炖的第一碗老母鸡汤，在医院里给彼此最深的心安。跟着我，你有满满的安全感；而你，就是我最大的底气。</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-box">
+            <h1>执手白头</h1>
+            <p style="font-weight: 500;">
+                2025.12.10 成为唯一。<br><br>
+                未来的每一个春夏秋冬，我会陪你看云舒云卷。<br>
+                永远做我最宠的小公主，我的“鑫鑫宝贝”。
+            </p>
+            <p style="margin-top: 40px; font-size: 0.8rem; color: #aaa;">—— 最爱你的哥哥</p>
+        </div>
+    </section>
+</div>
+
+<script>
+    const container = document.getElementById('scrollContainer');
+    const sections = document.querySelectorAll('section');
+    const particleContainer = document.getElementById('particle-container');
+
+    // 1. 炫酷掉落效果：持续掉落紫色爱心
+    function createFallingHeart() {
+        const heart = document.createElement('div');
+        heart.innerHTML = Math.random() > 0.5 ? '💜' : '✨';
+        heart.style.cssText = `
+            position: absolute; left: ${Math.random() * 100}vw; top: -20px;
+            font-size: ${Math.random() * 15 + 10}px; opacity: ${Math.random()};
+            transition: transform 4s linear, opacity 4s;
+        `;
+        particleContainer.appendChild(heart);
+        setTimeout(() => {
+            heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+            heart.style.opacity = '0';
+        }, 50);
+        setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(createFallingHeart, 250);
+
+    // 2. 交互效果：点击屏幕弹出爱心反馈
+    document.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        const sp = document.createElement('div');
+        sp.className = 'sparkle';
+        sp.innerHTML = '💜';
+        sp.style.left = t.clientX - 10 + 'px';
+        sp.style.top = t.clientY - 10 + 'px';
+        document.body.appendChild(sp);
+        setTimeout(() => sp.remove(), 800);
+    });
+
+    // 3. 滚动交互逻辑
+    container.addEventListener('scroll', () => {
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (Math.abs(rect.top) < window.innerHeight / 2) {
+                sec.classList.add('active');
+            } else {
+                sec.classList.remove('active');
+            }
+        });
+    });
+
+    // 适配iOS防抖
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
+    // --- 音乐控制逻辑 ---
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('music-btn');
+    let isPlaying = false;
+
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            musicBtn.classList.remove('playing');
+            musicBtn.innerText = '🔇';
+        } else {
+            audio.play();
+            musicBtn.classList.add('playing');
+            musicBtn.innerText = '🎵';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMusic();
+    });
+
+    const autoPlayMusic = () => {
+        if (!isPlaying) {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('playing');
+                musicBtn.innerText = '🎵';
+            }).catch(err => {
+                console.log("浏览器限制自动播放，请点击音乐按钮");
+            });
+        }
+        document.removeEventListener('touchstart', autoPlayMusic);
+        document.removeEventListener('click', autoPlayMusic);
+        container.removeEventListener('scroll', autoPlayMusic);
+    };
+
+    document.addEventListener('touchstart', autoPlayMusic, { once: true });
+    document.addEventListener('click', autoPlayMusic, { once: true });
+    container.addEventListener('scroll', autoPlayMusic, { once: true });
+    document.addEventListener('wheel', autoPlayMusic, { once: true });
+    document.addEventListener('touchmove', autoPlayMusic, { once: true });
+</script>
+
+</body>
+</html>

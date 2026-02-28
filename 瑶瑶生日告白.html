@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致我最爱的瑶瑶 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 星空背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* 飘落的爱心 */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            top: -50px;
+            animation: fall linear infinite;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 6px currentColor);
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* 萤火虫效果 */
+        .firefly {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffeaa7 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: firefly-float 8s ease-in-out infinite;
+        }
+
+        @keyframes firefly-float {
+            0%, 100% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+            25% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(100px, -50px);
+            }
+            75% {
+                opacity: 1;
+            }
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 标题区域 */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #f8e1e7;
+            text-shadow: 0 0 20px rgba(248, 177, 149, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: rgba(255, 235, 220, 0.8);
+            letter-spacing: 2px;
+        }
+
+        /* 内容卡片 */
+        .card {
+            background: linear-gradient(145deg, rgba(45, 40, 55, 0.9) 0%, rgba(35, 30, 45, 0.95) 100%);
+            border: 1px solid rgba(248, 177, 149, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(248, 177, 149, 0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.4s; }
+        .card:nth-child(4) { animation-delay: 0.6s; }
+        .card:nth-child(5) { animation-delay: 0.8s; }
+        .card:nth-child(6) { animation-delay: 1s; }
+        .card:nth-child(7) { animation-delay: 1.2s; }
+        .card:nth-child(8) { animation-delay: 1.4s; }
+        .card:nth-child(9) { animation-delay: 1.6s; }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card h2 {
+            color: #f8b195;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(248, 177, 149, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #e8ddd9;
+            line-height: 2;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .card .highlight {
+            color: #f8b195;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(248, 177, 149, 0.3);
+        }
+
+        /* 特殊文字效果 - 发光呼吸 */
+        .glow-text {
+            color: #ffd1dc;
+            animation: glow-pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { 
+                text-shadow: 0 0 5px #f8b195, 0 0 10px #f8b195, 0 0 20px #f8b195;
+                filter: brightness(1);
+            }
+            50% { 
+                text-shadow: 0 0 10px #f8b195, 0 0 20px #f8b195, 0 0 40px #f8b195, 0 0 60px #f8b195;
+                filter: brightness(1.2);
+            }
+        }
+
+        /* 彩虹渐变文字 */
+        .rainbow-text {
+            background: linear-gradient(90deg, #f8b195, #f67280, #c06c84, #f8b195);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-flow 3s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes rainbow-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* 打字机效果文字 */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #f8b195;
+            white-space: nowrap;
+            animation: typing 3s steps(20) forwards, blink-caret 0.75s step-end infinite;
+            display: inline-block;
+            max-width: 0;
+        }
+
+        .typewriter.active {
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            from { max-width: 0; }
+            to { max-width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #f8b195; }
+        }
+
+        /* 闪烁星星文字 */
+        .sparkle-text {
+            position: relative;
+            color: #ffe4c9;
+            font-weight: bold;
+        }
+
+        .sparkle-text::before,
+        .sparkle-text::after {
+            content: '✨';
+            position: absolute;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .sparkle-text::before {
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .sparkle-text::after {
+            right: -20px;
+            animation-delay: 0.75s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+
+        /* 浮动弹跳文字 */
+        .bounce-text {
+            display: inline-block;
+            color: #ffb8c6;
+            font-weight: bold;
+            animation: bounce-float 2s ease-in-out infinite;
+        }
+
+        .bounce-text span {
+            display: inline-block;
+            animation: letter-bounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes letter-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* 心跳文字 */
+        .heartbeat-text {
+            display: inline-block;
+            color: #f8b195;
+            font-weight: bold;
+            animation: text-heartbeat 1.2s ease-in-out infinite;
+        }
+
+        @keyframes text-heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        /* 渐显文字 */
+        .fade-in-text {
+            opacity: 0;
+            animation: fade-in-up 1s ease-out forwards;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 下划线动画 */
+        .underline-text {
+            position: relative;
+            color: #f8e1e7;
+            font-weight: bold;
+        }
+
+        .underline-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f8b195, #f67280);
+            animation: underline-grow 2s ease-in-out infinite;
+        }
+
+        @keyframes underline-grow {
+            0%, 100% { width: 0; left: 0; }
+            50% { width: 100%; left: 0; }
+        }
+
+        /* 名字特效 - 金色光芒 */
+        .name-special {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 
+                0 0 5px #ffd700,
+                0 0 10px #ffa500,
+                0 0 20px #ff8c00,
+                0 0 30px #ff6600;
+            animation: name-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes name-glow {
+            from {
+                text-shadow: 
+                    0 0 5px #ffd700,
+                    0 0 10px #ffa500,
+                    0 0 20px #ff8c00;
+            }
+            to {
+                text-shadow: 
+                    0 0 10px #ffd700,
+                    0 0 20px #ffa500,
+                    0 0 40px #ff8c00,
+                    0 0 60px #ff6600;
+            }
+        }
+
+        /* 引用样式 */
+        .quote {
+            background: linear-gradient(135deg, rgba(248, 177, 149, 0.1) 0%, rgba(248, 177, 149, 0.05) 100%);
+            border-left: 3px solid #f8b195;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #f0e6e2;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 3em;
+            color: rgba(248, 177, 149, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        /* 强调文字 */
+        .emphasis {
+            font-size: 1.2em;
+            color: #f8e1e7;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(248, 177, 149, 0.3);
+        }
+
+        /* 承诺列表 */
+        .promise-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .promise-list li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, rgba(248, 177, 149, 0.1) 0%, rgba(248, 177, 149, 0.05) 100%);
+            border-radius: 10px;
+            color: #e8ddd9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .promise-list li:hover {
+            transform: translateX(10px);
+            border-color: rgba(248, 177, 149, 0.3);
+            box-shadow: 0 5px 20px rgba(248, 177, 149, 0.1);
+        }
+
+        .promise-list li::before {
+            content: '💕';
+            font-size: 1.2em;
+        }
+
+        /* 结尾区域 */
+        .ending {
+            text-align: center;
+            padding: 50px 40px;
+            background: linear-gradient(145deg, rgba(248, 177, 149, 0.15) 0%, rgba(45, 40, 55, 0.9) 100%);
+            border: 1px solid rgba(248, 177, 149, 0.3);
+        }
+
+        .ending h2 {
+            color: #f8e1e7;
+            border-bottom: none;
+            justify-content: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(248, 177, 149, 0.5);
+        }
+
+        .ending p {
+            color: #f0e6e2;
+            font-size: 1.3em;
+        }
+
+        .ending .signature {
+            margin-top: 40px;
+            font-style: italic;
+            opacity: 0.9;
+            color: #f8b195;
+        }
+
+        /* 大爱心动画 */
+        .big-heart {
+            font-size: 4em;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 20px rgba(248, 177, 149, 0.6));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* 日期标签 */
+        .date-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(248, 177, 149, 0.3) 0%, rgba(248, 177, 149, 0.15) 100%);
+            color: #f8e1e7;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            border: 1px solid rgba(248, 177, 149, 0.3);
+        }
+
+        /* 光晕效果 */
+        .glow-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .glow-orb-1 {
+            background: #f8b195;
+            top: 10%;
+            left: 10%;
+            animation: float-orb 15s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            background: #c06c84;
+            bottom: 20%;
+            right: 10%;
+            animation: float-orb 18s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(50px, 30px); }
+            66% { transform: translate(-30px, 50px); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .card {
+                padding: 25px;
+            }
+            .card h2 {
+                font-size: 1.3em;
+            }
+        }
+
+        /* ----- 音乐播放器按钮样式 ----- */
+        .music-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: rgba(248, 177, 149, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(248, 177, 149, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 0 20px rgba(248, 177, 149, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(248, 177, 149, 0.5);
+        }
+
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop src="bgm.mp3"></audio>
+    
+    <!-- 音乐控制按钮 -->
+    <div id="music-btn" class="music-btn">🎵</div>
+    <!-- 光晕 -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <!-- 星空 -->
+    <div class="stars" id="stars"></div>
+
+    <!-- 飘落的爱心 -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- 萤火虫容器 -->
+    <div id="fireflies"></div>
+
+    <div class="container">
+        <!-- 标题 -->
+        <header class="header">
+            <h1>💕 致我最爱的<span class="name-special">瑶瑶</span> 💕</h1>
+            <p class="subtitle">一份专属于你的生日告白</p>
+        </header>
+
+        <!-- 开篇 -->
+        <div class="card">
+            <h2>💌 亲爱的<span class="heartbeat-text">瑶妹妹</span></h2>
+            <span class="date-tag">2024年9月9日</span>
+            <p>还记得那一天吗？</p>
+            <p>那天你问我<span class="glow-text">"干嘛呀"</span>，我说<span class="glow-text">"看到啦嘿嘿"</span>。</p>
+            <p>从那一刻起，我的世界开始有了<span class="rainbow-text">不一样的色彩</span>。</p>
+        </div>
+
+        <!-- 关于思念 -->
+        <div class="card">
+            <h2>🌙 关于思念</h2>
+            <p>你问我有多想你，我说：</p>
+            <div class="quote">
+                "有<span class="sparkle-text">天空那么大</span>的思念，等等就会变成雨落下来，<span class="underline-text">思念如雨，漫倾天地</span>。"
+            </div>
+            <p>而你回我：</p>
+            <div class="quote">
+                "<span class="glow-text">晓看天色暮看云</span>"
+            </div>
+            <p class="emphasis"><span class="rainbow-text">那一刻我就知道，你是我要找的人。</span></p>
+        </div>
+
+        <!-- 关于日常 -->
+        <div class="card">
+            <h2>🌸 关于日常</h2>
+            <p>我喜欢你叫我<span class="heartbeat-text">"哥哥"</span>时害羞的样子，</p>
+            <p>喜欢你偷吃零食被我发现时的<span class="bounce-text">小心虚</span>，</p>
+            <p>喜欢你在地铁上困到差点躺进大爷怀里的<span class="glow-text">迷糊</span>，</p>
+            <p>喜欢你一路狂奔赶火车却把我落在站台的<span class="sparkle-text">"卧龙凤雏"</span>时刻。</p>
+            <div class="quote">
+                那次你先上了车，我在站台看着列车远去，<br>
+                心里想的不是生气，而是——<br>
+                "<span class="underline-text">还好12306还有票，只要能和你一起回家就好。</span>"
+            </div>
+        </div>
+
+        <!-- 关于成长 -->
+        <div class="card">
+            <h2>🌿 关于成长</h2>
+            <p>我记得你工作失误时的叹气，</p>
+            <p>记得你认不得路被指错方向的无助，</p>
+            <p>记得你第一次做漆扇<span class="glow-text">"丑哭了"</span>却被我留下的那一刻。</p>
+            <p class="emphasis">
+                那些你觉得笨拙的时刻，在我眼里都是<span class="heartbeat-text">可爱</span>。<br>
+                那些你觉得丢脸的事情，在我心里都是<span class="rainbow-text">珍贵的回忆</span>。
+            </p>
+        </div>
+
+        <!-- 关于心疼 -->
+        <div class="card">
+            <h2>🕯️ 关于心疼</h2>
+            <p>你说自己一个人去医院感觉很酷，很独立。</p>
+            <p>我懂，但我还是想陪着你。</p>
+            <p>不是因为你不行，而是因为——</p>
+            <p class="emphasis"><span class="sparkle-text">我不想让你一个人承受任何事</span>。</p>
+            <p>第一次给你炖老母鸡汤，你以为我很有经验，其实那是我<span class="glow-text">人生第一次</span>。</p>
+            <p class="highlight"><span class="rainbow-text">但为了你，我愿意学会所有我不会的事。</span></p>
+        </div>
+
+        <!-- 关于我们 -->
+        <div class="card">
+            <h2>✨ 关于我们</h2>
+            <p>从"<span class="underline-text">思念如马，自别离，不断奔跑未停蹄</span>"，</p>
+            <p>到"<span class="heartbeat-text">越来越喜欢他了，怎么办呀</span>"，</p>
+            <p>到<span class="sparkle-text">100天纪念日</span>的甜蜜，</p>
+            <p>到<span class="name-special">2025年12月10日</span>我们步入婚姻的殿堂。</p>
+            <p class="emphasis"><span class="rainbow-text">这一路，谢谢你选择了我。</span></p>
+        </div>
+
+        <!-- 生日祝福 -->
+        <div class="card">
+            <h2>🎂 生日快乐，我的<span class="name-special">瑶瑶</span></h2>
+            <p>今天是属于你的日子。我想对你说：</p>
+            <p class="emphasis">
+                感谢你愿意做我的<span class="heartbeat-text">妹妹</span>，<br>
+                感谢你愿意叫我<span class="heartbeat-text">哥哥</span>，<br>
+                感谢你愿意和我一起，<br>
+                <span class="rainbow-text">把平凡的日子过成故事</span>。
+            </p>
+            <div class="quote">
+                你说过："<span class="glow-text">跟哥哥一起，不管做什么都是开心的。</span>"
+            </div>
+            <p>这句话，我想原封不动还给你——</p>
+            <p class="emphasis"><span class="sparkle-text">跟瑶瑶一起，不管做什么都是开心的。</span></p>
+        </div>
+
+        <!-- 承诺 -->
+        <div class="card">
+            <h2>🤝 我的承诺</h2>
+            <p>我会继续：</p>
+            <ul class="promise-list">
+                <li>在你迷路时给你指方向（虽然有时候我也不太靠谱）</li>
+                <li>在你难过时给你抱抱（免费不限时哦）</li>
+                <li>在你生病时陪你去医院</li>
+                <li>在你饿的时候给你炖鸡汤</li>
+                <li>在你需要的时候，永远在你身边</li>
+            </ul>
+        </div>
+
+        <!-- 结尾 -->
+        <div class="card ending">
+            <h2>🎂 生日快乐，我最爱的<span class="name-special">瑶咿瑶</span></h2>
+            <div class="big-heart">💕</div>
+            <p>愿你<span class="rainbow-text">永远被爱包围</span>，</p>
+            <p>愿我们的故事，</p>
+            <p><strong class="sparkle-text">未完待续</strong></p>
+            <div class="signature">
+                <p><span class="heartbeat-text">你的哥哥</span></p>
+                <p><span class="glow-text">永远爱你的人</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建星空
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // 创建飘落的爱心
+        function createHeart() {
+            const heartsContainer = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const hearts = ['💕', '💗', '💖', '🩷', '✨'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+            heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            heart.style.color = `hsl(${Math.random() * 30 + 10}, 70%, 70%)`;
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 14000);
+        }
+        setInterval(createHeart, 500);
+        for (let i = 0; i < 10; i++) setTimeout(createHeart, i * 150);
+
+        // 创建萤火虫
+        function createFirefly() {
+            const container = document.getElementById('fireflies');
+            const firefly = document.createElement('div');
+            firefly.className = 'firefly';
+            firefly.style.left = Math.random() * 100 + '%';
+            firefly.style.top = Math.random() * 100 + '%';
+            firefly.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            firefly.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(firefly);
+        }
+        for (let i = 0; i < 20; i++) createFirefly();
+
+        // --- 音乐控制逻辑 ---
+        const audio = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
+
+        // 切换播放/暂停状态
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+                musicBtn.innerText = '🔇';
+            } else {
+                audio.play();
+                musicBtn.classList.add('playing');
+                musicBtn.innerText = '🎵';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 点击按钮控制音乐
+        musicBtn.addEventListener('click', toggleMusic);
+
+        // 智能自动播放：用户第一次交互时自动播放
+        const autoPlayMusic = () => {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.classList.add('playing');
+                    musicBtn.innerText = '🎵';
+                }).catch(err => {
+                    console.log("浏览器限制自动播放，请点击音乐按钮");
+                });
+            }
+            document.removeEventListener('touchstart', autoPlayMusic);
+            document.removeEventListener('click', autoPlayMusic);
+            document.removeEventListener('scroll', autoPlayMusic);
+        };
+
+        document.addEventListener('touchstart', autoPlayMusic, { once: true });
+        document.addEventListener('click', autoPlayMusic, { once: true });
+        window.addEventListener('scroll', autoPlayMusic, { once: true });
+        document.addEventListener('wheel', autoPlayMusic, { once: true });
+        document.addEventListener('touchmove', autoPlayMusic, { once: true });
+    </script>
+</body>
+</html>

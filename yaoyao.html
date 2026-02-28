@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致瑶瑶：从“卧龙凤雏”到执手白头</title>
+    <style>
+        /* 引入优雅字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;500&display=swap');
+
+        :root {
+            --theme-purple: #9d8df1;
+            --soft-purple: #f3f0ff;
+            --text-dark: #4a4a4a;
+            --accent-gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--soft-purple);
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 极简背景装饰 */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(157, 141, 241, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(247, 202, 201, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* 顶部封面 */
+        .header {
+            position: relative;
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(255,255,255,1)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=1000') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* 告白正文 */
+        .content {
+            padding: 40px 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--theme-purple);
+            border-bottom: 1px solid var(--theme-purple);
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 3px solid var(--soft-purple);
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #666;
+        }
+
+        /* 时光记录点 */
+        .date-badge {
+            background: var(--theme-purple);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* 图片占位符样式 */
+        .img-card {
+            width: 100%;
+            height: 200px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #ccc;
+            border: 1px dashed #ddd;
+        }
+
+        /* 结尾 */
+        .footer {
+            text-align: center;
+            padding: 40px 30px;
+            background: var(--soft-purple);
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.4rem;
+            color: var(--theme-purple);
+        }
+
+        /* 悬浮爱心 */
+        .heart {
+            position: fixed;
+            color: var(--theme-purple);
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: fly 4s linear forwards;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ----- 音乐播放器按钮样式 ----- */
+        .music-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: rgba(157, 141, 241, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(157, 141, 241, 0.4);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 0 15px rgba(157, 141, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(157, 141, 241, 0.5);
+        }
+
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 背景音乐 -->
+<audio id="bgMusic" loop src="bgm.mp3"></audio>
+
+<!-- 音乐控制按钮 -->
+<div id="music-btn" class="music-btn">🎵</div>
+
+<div class="bg-decoration"></div>
+
+<div class="container">
+    <header class="header">
+        <div class="date-badge">2026.02.28</div>
+        <h1>瑶瑶，生日快乐</h1>
+        <p>我们的故事，从那一抹紫色开始</p>
+    </header>
+
+    <main class="content" id="mainContent">
+        <section class="section">
+            <span class="section-title">Chapter 1. 初遇的序章</span>
+            <div class="date-badge">2024.05.06</div>
+            <p>故事的序章始于2024年5月6日，那天你穿着紫色大T恤、顶着自嘲为“金毛狮王”的发型，想躲却没躲掉，我们竟然奇迹般地坐上了同一趟车、同一节车厢。</p>
+            <div class="quote">“也许从那一刻起，命运就决定了你是我的‘妹妹’，而我是你的‘哥哥’。”</div>
+        </section>
+
+        <section class="section">
+            <span class="section-title">Chapter 2. 温暖的碎片</span>
+            <p>我们的生活，是由无数个温暖的碎片拼凑而成的：</p>
+            
+            <p><strong>☕ 清晨的烟火气：</strong></p>
+            <p>是那些叫不醒我的早晨，也是你吃到了心心念念的豆腐包和茶鸡蛋时，隔着屏幕都能感受到的开心。</p>
+
+            <p><strong>🚆 “卧龙凤雏”的记忆：</strong></p>
+            <p>想起那个十一假期，我们在北京西站疯狂奔跑，最后我目送你绝尘而去，我却留在了站台。那份“又生气又无语又内疚”的复杂心情，现在想来，都是我们爱情里最生动的注脚。</p>
+        </section>
+
+        <section class="section">
+            <span class="section-title">Chapter 3. 唯一的底气</span>
+            <p><strong>🍲 第一次为你炖的鸡汤：</strong></p>
+            <p>即便我是初次探索，只要能得到你的夸赞，一切的忙碌都变成了满满的成就感。</p>
+
+            <p><strong>🌅 那些彼此照亮的日子：</strong></p>
+            <p>你说跟着我总是安全感满满，其实，你的存在才是我的底气。我们曾一起漆扇、一起看夕阳，在那些平凡的日子里彼此照亮。</p>
+        </section>
+
+        <section class="section">
+            <span class="section-title">Chapter 4. 执手白头</span>
+            <p>虽然我们也曾有过患得患失的煎熬时刻，但正是那些“心在发抖”的瞬间，让我更加确定，我再也不想失去你。</p>
+            <div class="date-badge">2024.11.18 相爱100天</div><br>
+            <div class="date-badge">2025.12.10 正式成为唯一</div>
+            <p>未来的日子里，我依然想和你一直“粘在一起”，依然想听你撒娇叫我“鑫鑫宝贝”或“哥哥”。我会陪你走过每一个春夏秋冬，看遍每一场云舒云卷。</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>愿你岁岁平安</p>
+        <p>永远做我最宠的小公主</p>
+        <div style="margin-top: 20px; font-size: 0.9rem; color: #888;">
+            最爱你的哥哥<br>
+            2026年
+        </div>
+    </footer>
+</div>
+
+<script>
+    // 页面加载后的入场动画
+    window.onload = () => {
+        document.getElementById('mainContent').classList.add('visible');
+    };
+
+    // 点击屏幕产生爱心
+    document.addEventListener('click', (e) => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '💜';
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
+        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    });
+
+    // 自动飘落爱心
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '💜';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '100vh';
+        heart.style.opacity = Math.random();
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }, 500);
+
+    // --- 音乐控制逻辑 ---
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('music-btn');
+    let isPlaying = false;
+
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            musicBtn.classList.remove('playing');
+            musicBtn.innerText = '🔇';
+        } else {
+            audio.play();
+            musicBtn.classList.add('playing');
+            musicBtn.innerText = '🎵';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMusic();
+    });
+
+    const autoPlayMusic = () => {
+        if (!isPlaying) {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('playing');
+                musicBtn.innerText = '🎵';
+            }).catch(err => {
+                console.log("浏览器限制自动播放，请点击音乐按钮");
+            });
+        }
+        document.removeEventListener('touchstart', autoPlayMusic);
+        document.removeEventListener('click', autoPlayMusic);
+        document.removeEventListener('scroll', autoPlayMusic);
+    };
+
+    document.addEventListener('touchstart', autoPlayMusic, { once: true });
+    document.addEventListener('click', autoPlayMusic, { once: true });
+    window.addEventListener('scroll', autoPlayMusic, { once: true });
+    document.addEventListener('wheel', autoPlayMusic, { once: true });
+    document.addEventListener('touchmove', autoPlayMusic, { once: true });
+</script>
+
+</body>
+</html>
